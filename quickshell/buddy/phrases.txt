@@ -1,0 +1,59 @@
+# Une phrase par ligne. Les lignes qui commencent par # sont ignorées.
+Ça marchait hier, je te jure.
+J'ai pas de bug, j'ai des features surprises.
+Mon code compile. Je ne sais pas pourquoi. Je ne touche plus à rien.
+99 petits bugs dans le code... j'en corrige un... 127 petits bugs dans le code.
+Le café, c'est juste du code en état liquide.
+git push --force et on prie.
+Il n'y a que deux choses difficiles : le cache, nommer les variables, et les erreurs off-by-one.
+Chez moi ça marche. On livre ma machine alors ?
+Aujourd'hui je refactore. Demain je pleure.
+// TODO: comprendre ce que j'ai écrit hier
+J'ai demandé à Stack Overflow. Ils m'ont marqué en doublon.
+Un jour j'écrirai des tests. Un jour.
+sudo fais-moi un sandwich.
+Ctrl+S, Ctrl+S, Ctrl+S... on sait jamais.
+Ce n'est pas un bug, c'est un easter egg non documenté.
+Mon chat a relu le code. Il a vomi dessus. C'est validé.
+NullPointerException : comme ma motivation le lundi.
+J'ai mis un console.log. Puis 47 autres.
+La documentation ? C'est le code. Bonne chance.
+Il est 3h du mat et je débugge un point-virgule.
+Hello, World ! (oui, encore)
+Pourquoi faire simple quand on peut faire une regex ?
+Une regex pour résoudre un problème. Maintenant j'en ai deux.
+Je ne procrastine pas, je laisse le compilateur réfléchir.
+Mon IDE me juge. Je le sens.
+J'ai fermé Vim. Il m'a fallu 3 jours.
+Le mot de passe c'est "password123". Non je rigole. ...Non ?
+Dark mode activé. Productivité : inchangée.
+J'ai trouvé le bug ! ... c'était moi.
+Tabs ou espaces ? Je choisis la violence.
+Le prod est en feu ? C'est le style "flambé".
+rm -rf node_modules && npm install : la méditation du dev.
+node_modules pèse plus lourd que mon avenir.
+Je ne bois pas de café, je compile mon énergie.
+Encore 5 minutes et j'arrête. (il y a 3 heures)
+Ce code est auto-documenté. Par le chaos.
+Mon code n'a pas de bugs. Il développe des comportements aléatoires.
+J'ai écrit ce code avec amour. Et un peu de panique.
+Deploy le vendredi à 17h59 : le vrai frisson.
+L'IA va me remplacer ? Elle va d'abord devoir comprendre mon code.
+Je suis full-stack : je stack les bugs du front au back.
+Commit message : "fix". Encore. Et encore.
+Erreur 418 : je suis une théière.
+Le meilleur code est celui qu'on n'a pas écrit.
+Je debug avec des printf comme les anciens.
+Il y a 10 types de personnes : celles qui comprennent le binaire et les autres.
+Mon dernier commit : "je sais pas mais ça marche".
+SUPER + Q pour fermer. Pas Alt+F4, on n'est pas sous Windows ici.
+I use Arch btw.
+Hyprland, c'est beau. Comme mes animations de 300 ms.
+Le wifi tombe ? Le code aussi.
+Merge conflict : la thérapie de couple des devs.
+Je ne suis pas paresseux, je suis en mode économie d'énergie.
+Quand ça compile du premier coup, méfie-toi.
+Personne : ... Moi à 2h : "et si je réécrivais tout en Rust ?"
+Mon chat est senior dev. Il dort sur le clavier, ça corrige tout.
+Aujourd'hui j'ai appris un truc. Demain je l'aurai oublié. C'est ça la vie.
+Allez, encore un petit café et on attaque ce bug ☕

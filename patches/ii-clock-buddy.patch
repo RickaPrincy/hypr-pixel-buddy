@@ -1,0 +1,28 @@
+--- a/modules/ii/background/widgets/AbstractBackgroundWidget.qml	2026-10-02 21:17:46.361644585 +0300
++++ b/modules/ii/background/widgets/AbstractBackgroundWidget.qml	2026-10-02 21:32:37.707316033 +0300
+@@ -33,7 +33,25 @@
+     }
+ 
+     draggable: placementStrategy === "free"
++    // [buddy] suivre les changements de position écrits dans config.json (ex. par le compagnon)
++    Connections {
++        target: root.configEntry
++        function onXChanged() { if (root.placementStrategy === "free" && !root.pressed) root.targetX = Math.max(0, Math.min(root.configEntry.x, root.scaledScreenWidth - root.width)) }
++        function onYChanged() { if (root.placementStrategy === "free" && !root.pressed) root.targetY = Math.max(0, Math.min(root.configEntry.y, root.scaledScreenHeight - root.height)) }
++    }
++    // [buddy] envoie la position en direct au compagnon pendant le glisser
++    Socket {
++        id: buddySocket
++        path: Quickshell.env("XDG_RUNTIME_DIR") + "/qs-buddy.sock"
++    }
++    onPressed: if (root.draggable) buddySocket.connected = true
++    onPositionChanged: {
++        if (!root.pressed || !buddySocket.connected) return;
++        buddySocket.write(Math.round(root.x) + " " + Math.round(root.y) + " " + Math.round(root.width) + " " + Math.round(root.height) + "\n");
++        buddySocket.flush();
++    }
+     onReleased: {
++        if (buddySocket.connected) { buddySocket.write("end\n"); buddySocket.flush(); buddySocket.connected = false; }
+         root.targetX = root.x;
+         root.targetY = root.y;
+         configEntry.x = root.targetX;
