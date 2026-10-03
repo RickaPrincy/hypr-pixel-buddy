@@ -2,6 +2,8 @@
 
 A pixel-art desktop for **Hyprland + [illogical-impulse](https://github.com/end-4/dots-hyprland)** (Quickshell), with a little dev who lives in the wallpaper.
 
+> **Heads up: this is my personal config.** It's tuned for my setup and my habits. I use an **AZERTY** keyboard, so the keybinds (workspaces especially) assume an AZERTY layout. On QWERTY you'll want to edit `hypr/custom/keybinds.lua` before installing. Some of the buddy's phrases are in French, too. Feel free to take what you like and adapt the rest.
+
 ![demo](media/demo.gif)
 
 ## What's inside
@@ -33,7 +35,7 @@ Everything pauses when windows cover the desktop, so it uses 0% CPU while you wo
 
 **Extras (Hyprland keybinds):**
 
-- AZERTY-friendly workspace binds: `Super+Alt+& é " …` sends a window to a workspace, `Super+Shift+& é " …` moves it there and follows it.
+- AZERTY workspace binds (this is my layout; QWERTY users should change these): `Super+Alt+& é " …` sends a window to a workspace, `Super+Shift+& é " …` moves it there and follows it.
 - Screenshots saved to `~/Pictures/Screenshots` and copied to the clipboard: `Super+Ctrl+Shift+S` / `Shift+Print` (region), `Super+Print` (full screen), `Super+Shift+E` (region + annotate with swappy).
 
 ## Install
@@ -76,7 +78,6 @@ qs -c buddy ipc call buddy state
 - `quickshell/buddy/phrases.txt`: phrases of the day, one per line. The file reloads live.
 - `quickshell/buddy/tools/make_world.py`: regenerates the wallpaper and `scene.json` (platform positions).
 - `quickshell/buddy/tools/make_sprite.py`: regenerates the sprite sheet (the character is built from parts, and adding a pose takes one line).
-- `wallpapers/hello-world.mp4`: an animated "Hello, World!" video wallpaper, as a bonus. It needs `mpvpaper`.
 
 ---
 

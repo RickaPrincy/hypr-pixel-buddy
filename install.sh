@@ -11,8 +11,8 @@ rm -rf "$CFG/quickshell/buddy"
 cp -r quickshell/buddy "$CFG/quickshell/buddy"
 
 echo ":: Hyprland custom"
-mkdir -p "$CFG/hypr/custom/scripts/wallpaper"
-for f in keybinds.lua execs.lua general.lua scripts/screenshot.sh scripts/wallpaper/make_hello_world.py; do
+mkdir -p "$CFG/hypr/custom/scripts"
+for f in keybinds.lua execs.lua general.lua scripts/screenshot.sh; do
     dst="$CFG/hypr/custom/$f"
     if [[ -f "$dst" ]] && ! cmp -s "hypr/custom/$f" "$dst"; then cp "$dst" "$dst.bak"; fi
     cp "hypr/custom/$f" "$dst"
