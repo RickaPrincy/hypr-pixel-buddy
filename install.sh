@@ -12,12 +12,12 @@ cp -r quickshell/buddy "$CFG/quickshell/buddy"
 
 echo ":: Hyprland custom"
 mkdir -p "$CFG/hypr/custom/scripts"
-for f in keybinds.lua execs.lua general.lua scripts/screenshot.sh; do
+for f in keybinds.lua execs.lua general.lua scripts/screenshot.sh scripts/qs_watchdog.sh; do
     dst="$CFG/hypr/custom/$f"
     if [[ -f "$dst" ]] && ! cmp -s "hypr/custom/$f" "$dst"; then cp "$dst" "$dst.bak"; fi
     cp "hypr/custom/$f" "$dst"
 done
-chmod +x "$CFG/hypr/custom/scripts/screenshot.sh"
+chmod +x "$CFG/hypr/custom/scripts/screenshot.sh" "$CFG/hypr/custom/scripts/qs_watchdog.sh"
 
 echo ":: wallpaper"
 mkdir -p "$HOME/Pictures/Wallpapers"

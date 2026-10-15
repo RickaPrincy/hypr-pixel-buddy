@@ -53,7 +53,8 @@ git clone <this repo> && cd hypr-pixel-buddy
 - copies the Hyprland files to `~/.config/hypr/custom`, backing up any existing ones as `*.bak`;
 - applies a small patch to illogical-impulse (see below);
 - sets the wallpaper and makes the clock draggable;
-- starts the buddy.
+- starts the buddy;
+- installs a small watchdog that relaunches `ii` or the buddy on its own if either one crashes, so you don't have to reload Hyprland by hand.
 
 ### The ii patch
 
