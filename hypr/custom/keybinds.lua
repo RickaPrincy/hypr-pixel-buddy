@@ -28,3 +28,21 @@ hl.bind("SUPER + Print", hl.dsp.exec_cmd(shot .. " full"),
 --##! Buddy
 -- Ctrl+Super+R tue tous les qs (ii + buddy) : on relance buddy après ii
 hl.bind("CTRL + SUPER + R", hl.dsp.exec_cmd("sleep 2 && qs -c buddy -d"))
+
+--##! Fix: SUPER release ne doit pas toggler la recherche si une autre touche a été pressée
+-- (binds "searchToggleReleaseInterrupt" perdus lors de la migration hyprlang -> lua)
+-- Sans ça : SUPER+V ouvre le presse-papiers puis le relâchement de SUPER le referme.
+local interrupt = hl.dsp.global("quickshell:searchToggleReleaseInterrupt")
+-- "catchall" n'est autorisé que dans les submaps en lua -> on lie chaque keycode (non_consuming)
+for _, mods in ipairs({ "SUPER", "SUPER + SHIFT", "SUPER + CTRL", "SUPER + ALT" }) do
+    for code = 9, 135 do
+        if code ~= 133 and code ~= 134 then -- Super_L / Super_R
+            hl.bind(mods .. " + code:" .. code, interrupt, { non_consuming = true })
+        end
+    end
+end
+hl.bind("CTRL + SUPER_L", interrupt)
+hl.bind("CTRL + SUPER_R", interrupt)
+for _, m in ipairs({ "mouse:272", "mouse:273", "mouse:274", "mouse:275", "mouse:276", "mouse_up", "mouse_down" }) do
+    hl.bind("SUPER + " .. m, interrupt, { non_consuming = true })
+end

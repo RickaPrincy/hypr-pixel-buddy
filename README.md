@@ -36,6 +36,7 @@ Everything pauses when windows cover the desktop, so it uses 0% CPU while you wo
 **Extras (Hyprland keybinds):**
 
 - AZERTY workspace binds (this is my layout; QWERTY users should change these): `Super+Alt+& é " …` sends a window to a workspace, `Super+Shift+& é " …` moves it there and follows it.
+- Fixes `Super+V` (clipboard history) and other `Super+key` shortcuts on the Lua config: without the `searchToggleReleaseInterrupt` binds, releasing Super toggled the search overview and closed the panel you just opened.
 - Screenshots saved to `~/Pictures/Screenshots` and copied to the clipboard: `Super+Ctrl+Shift+S` / `Shift+Print` (region), `Super+Print` (full screen), `Super+Shift+E` (region + annotate with swappy).
 
 ## Install
