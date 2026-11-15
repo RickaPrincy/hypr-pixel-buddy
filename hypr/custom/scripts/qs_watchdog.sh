@@ -5,6 +5,10 @@
 LOG="$HOME/.cache/hypr-pixel-buddy-watchdog.log"
 INTERVAL=5
 
+# Une seule instance du watchdog (sinon plusieurs relancent buddy en même temps -> doublons)
+exec 9>"${XDG_RUNTIME_DIR:-/tmp}/hypr-pixel-buddy-watchdog.lock"
+flock -n 9 || exit 0
+
 log() { printf '%s %s\n' "$(date '+%F %T')" "$1" >> "$LOG"; }
 
 # Une instance peut se relancer toute seule et perdre ses arguments (elle apparaît alors
@@ -13,12 +17,18 @@ running() { qs list --all 2>/dev/null | grep -q "Config path: $HOME/.config/quic
 
 # Relance buddy de force (kill + start) : après une mise en veille le process peut
 # rester vivant mais sans fenêtre, donc "running" ne suffit pas à le détecter.
+# Verrou + on tue TOUTES les instances de buddy avant d'en lancer une seule (jamais de doublon).
 restart_buddy() {
-    log "$1 -> redémarrage de buddy"
-    qs -c buddy kill >/dev/null 2>&1
-    sleep 1
-    nohup qs -c buddy -d >/dev/null 2>&1 &
-    disown
+    (
+        flock 8
+        log "$1 -> redémarrage de buddy"
+        qs list --all 2>/dev/null | awk -v c="$HOME/.config/quickshell/buddy/shell.qml" '
+            /Process ID:/ { pid = $3 }
+            $0 ~ "Config path: " c { print pid }' | xargs -r kill 2>/dev/null
+        sleep 1
+        nohup qs -c buddy -d >/dev/null 2>&1 &
+        disown
+    ) 8>"${XDG_RUNTIME_DIR:-/tmp}/hypr-pixel-buddy-restart.lock"
 }
 
 # Vrai si buddy est dessous le fond de ii (même couche "bottom") : il tourne mais est invisible.
