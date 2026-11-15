@@ -21,6 +21,17 @@ restart_buddy() {
     disown
 }
 
+# Vrai si buddy est dessous le fond de ii (même couche "bottom") : il tourne mais est invisible.
+# Hyprland liste les layers dans l'ordre d'empilement, le dernier est au-dessus.
+buddy_hidden() {
+    hyprctl layers 2>/dev/null | awk '
+        /^Monitor/ { bud = 0; bg = 0; n = 0 }
+        /namespace: quickshell:buddy/      { bud = ++n }
+        /namespace: quickshell:background/ { bg = ++n }
+        bud && bg && bud < bg { hidden = 1 }
+        END { exit hidden ? 0 : 1 }'
+}
+
 # Sortie de veille : logind émet PrepareForSleep(false) au réveil.
 (
     gdbus monitor --system --dest org.freedesktop.login1 2>/dev/null | while read -r line; do
@@ -51,6 +62,10 @@ while true; do
         nohup qs -c ii >/dev/null 2>&1 &
         disown
         sleep 5
+        # ii recrée son fond par-dessus buddy : on relance buddy après lui
+        restart_buddy "ii relancé"
+    elif running buddy && buddy_hidden; then
+        restart_buddy "buddy caché sous le fond de ii"
     fi
 
     if ! running buddy; then

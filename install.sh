@@ -41,6 +41,9 @@ else
     echo "!! illogical-impulse not found ($II): skipping patch and wallpaper"
 fi
 
+qt_sys=$(pacman -Q qt6-base 2>/dev/null | awk '{print $2}' | cut -d- -f1 || true)
+echo ":: Qt système: ${qt_sys:-?} (si quickshell plante : le recompiler, ex. yay -S quickshell)"
+
 echo ":: start buddy"
 qs -c buddy kill >/dev/null 2>&1 || true
 qs -c buddy -d >/dev/null 2>&1 || true
