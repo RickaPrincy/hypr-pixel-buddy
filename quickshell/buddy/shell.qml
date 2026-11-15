@@ -122,18 +122,23 @@ ShellRoot {
         function onRawEvent(event) {
             // le fond de ii vient d'être (re)créé : on repasse au-dessus de lui
             if (event.name === "openlayer" && event.data.trim() === "quickshell:background") remap.restart();
+            // écran rallumé / rebranché (sortie de veille) : on recrée la surface
+            if (["monitoradded", "monitoraddedv2", "monitorremoved", "monitorremovedv2"].includes(event.name)) remap.restart();
             if (["openwindow", "closewindow", "movewindow", "movewindowv2", "workspace", "workspacev2", "focusedmon",
                  "changefloatingmode", "activespecial", "fullscreen"].includes(event.name))
                 coverDebounce.restart();
         }
     }
     Component.onCompleted: coverCheck.running = true
-    Timer { id: remap; interval: 400; onTriggered: { win.visible = false; win.visible = true; } }
+    Timer { id: remap; interval: 400; onTriggered: { win.visible = false; win.visible = win.screen !== null; coverCheck.running = true; } }
+    // Quickshell signale aussi les changements d'écrans
+    Connections { target: Quickshell; function onScreensChanged() { remap.restart(); } }
 
     // =====================================================================
     PanelWindow {
         id: win
-        screen: Quickshell.screens[0]
+        // réactif : si l'écran disparaît (veille/DPMS/hotplug) puis revient, la fenêtre le suit
+        screen: Quickshell.screens.length > 0 ? Quickshell.screens[0] : null
         WlrLayershell.layer: WlrLayer.Bottom
         WlrLayershell.namespace: "quickshell:buddy"
         exclusionMode: ExclusionMode.Ignore
